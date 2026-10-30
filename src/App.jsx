@@ -9,17 +9,17 @@ import {
 const services = [
   {
     title: 'Brand Identity',
-    text: 'Visual identity systems, premium social graphics, and clear brand direction for businesses that want perceived value.',
+    text: 'Visual identity systems, premium visuals, and strategic brand positions for businesses that need instant clarity and trust.',
     price: 'From K250',
   },
   {
     title: 'Music & Promo Art',
-    text: 'Poster concepts, event visuals, music covers, and audience-focused creative assets designed to stop the scroll.',
+    text: 'Poster concepts, event visuals, music covers, and social promo assets designed to stop the scroll and drive action.',
     price: 'From K250',
   },
   {
     title: 'Tourism & Web Presence',
-    text: 'Creative marketing systems, digital presentation assets, and visual direction for hospitality, tourism, and service brands.',
+    text: 'Creative marketing systems and digital presentation assets for hospitality, tourism, and service-led brands.',
     price: 'Custom quote',
   },
 ];
@@ -28,34 +28,34 @@ const portfolio = [
   {
     title: 'Tourism Campaign Kit',
     tag: 'Branding + Visual Story',
-    text: 'An elevated destination campaign identity designed to make hospitality and travel offers feel premium and trust-worthy.',
+    text: 'A polished destination campaign direction built to increase trust, perception and immediate customer interest.',
   },
   {
     title: 'Music Promo Bundle',
     tag: 'Poster + Social Content',
-    text: 'A release-ready visual system built to support announcements, streaming pushes, and audience activation.',
+    text: 'A release-ready visual system built for announcements, streaming pushes, event hype and audience activation.',
   },
   {
     title: 'Creative Portfolio Experience',
     tag: 'Web Presence + Digital Brand',
-    text: 'A clever, concise, conversion-focused online presence built to communicate clarity, quality, and positioning.',
+    text: 'A premium online presence that communicates confidence, clarity and a strong visual standard from the first click.',
   },
 ];
 
 const process = [
-  'Clarify the offer, audience, and creative objective in a short discovery conversation.',
-  'Build the design direction, tone, hierarchy, and visual assets around your message.',
-  'Refine the concept through a tight revision round and final delivery workflow.',
-  'Launch with confidence and keep iterating as your business grows.',
+  'Clarify the offer, audience, and objective in a short discovery conversation.',
+  'Build the visual direction, hierarchy, and artistic system around the message.',
+  'Refine the concept through a focused revision round and final delivery workflow.',
+  'Launch with confidence and keep iterating as the brand grows.',
 ];
 
 const testimonials = [
   {
-    quote: 'The visuals immediately made the brand feel more premium, clearer, and far more deliberate.',
+    quote: 'The visuals immediately made the brand feel more premium, more decisive, and far more credible.',
     author: 'Brand Client',
   },
   {
-    quote: 'Strong creative instinct, clean execution, and a real understanding of what audiences respond to.',
+    quote: 'Strong creative instinct, clean execution, and a proper understanding of what audiences respond to.',
     author: 'Tourism Founder',
   },
 ];
@@ -108,23 +108,45 @@ function App() {
       </header>
 
       <main>
-        <section className="hero" id="home">
+        <section className="ecosystem-stage" id="home">
+          <div className="ecosystem-map">
+            <div className="ecosystem-center">
+              <span className="ecosystem-label">AI Builders and Creative Studios Ecosystem</span>
+            </div>
+
+            <div className="connectors" aria-hidden="true">
+              <span className="connector connector-a" />
+              <span className="connector connector-b" />
+              <span className="connector connector-c" />
+              <span className="connector connector-d" />
+              <span className="connector connector-e" />
+            </div>
+
+            <div className="node-stack">
+              {ecosystemNodes.map((node, index) => (
+                <div className={`node-card node-${index + 1}`} key={node.name}>
+                  <span className="node-name">{node.name}</span>
+                  <span className="node-arrow">›</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
           <div className="hero-copy">
             <span className="eyebrow">{siteConfig.movementName}</span>
             <h1>{siteConfig.tagline}</h1>
             <p className="lead">{siteConfig.originLine}</p>
             <p className="description">
-              {siteConfig.brandName} is a premium creative studio rooted in Livingstone, Zambia. We build visual systems,
-              design experiences, and digital assets that help founders, businesses, and creatives show up with clarity,
-              confidence and authority.
+              {siteConfig.brandName} is a premium creative studio rooted in Livingstone, Zambia. We combine design,
+              digital systems, automation, and marketing assets to help ambitious businesses and founders express value with clarity.
             </p>
 
             <div className="cta-row">
               <a className="button button-primary" href={getWhatsAppLink('SERVICES')} target="_blank" rel="noreferrer">
                 Start your project
               </a>
-              <a className="button button-ghost" href="#ecosystem">
-                Explore ecosystem
+              <a className="button button-ghost" href="#services">
+                Explore services
               </a>
             </div>
 
@@ -139,53 +161,9 @@ function App() {
               </div>
               <div>
                 <strong>Worldwide</strong>
-                <span>remote service delivery</span>
+                <span>remote delivery</span>
               </div>
             </div>
-          </div>
-
-          <div className="hero-visual-card">
-            <div className="studio-panel">
-              <div className="panel-head">
-                <span className="status-pill">Creative Studio</span>
-                <span className="status-pill inverse">Live</span>
-              </div>
-
-              <div className="visual-grid" aria-hidden="true">
-                <div className="visual-box tall" />
-                <div className="visual-box" />
-                <div className="visual-box" />
-                <div className="visual-box" />
-              </div>
-
-              <div className="panel-meta">
-                <div>
-                  <small>Founder</small>
-                  <strong>{siteConfig.founderName}</strong>
-                </div>
-                <div>
-                  <small>Based in</small>
-                  <strong>{siteConfig.locationLabel}</strong>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="section" id="ecosystem">
-          <div className="section-heading">
-            <span className="eyebrow">Ecosystem</span>
-            <h2>AI builders, creative systems, and digital growth infrastructure.</h2>
-          </div>
-
-          <div className="ecosystem-grid">
-            {ecosystemNodes.map((node) => (
-              <article className="ecosystem-card" key={node.name}>
-                <span className="mini-badge">{node.label}</span>
-                <h3>{node.name}</h3>
-                <p>{node.description}</p>
-              </article>
-            ))}
           </div>
         </section>
 
@@ -295,10 +273,13 @@ function App() {
           </div>
 
           <div className="contact-grid">
-            <form className="inquiry-form" onSubmit={(event) => {
-              event.preventDefault();
-              window.open(whatsAppLink, '_blank', 'noopener,noreferrer');
-            }}>
+            <form
+              className="inquiry-form"
+              onSubmit={(event) => {
+                event.preventDefault();
+                window.open(whatsAppLink, '_blank', 'noopener,noreferrer');
+              }}
+            >
               <label>
                 Name
                 <input name="name" value={form.name} onChange={handleChange} placeholder="Your name" />
