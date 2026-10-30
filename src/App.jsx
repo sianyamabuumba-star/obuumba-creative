@@ -1,76 +1,109 @@
-import { siteConfig, pricingConfig, designTokens } from './lib/brand';
+import { useMemo, useState } from 'react';
+import {
+  siteConfig,
+  pricingConfig,
+  ecosystemNodes,
+  getWhatsAppLink,
+} from './lib/brand';
 
 const services = [
   {
     title: 'Brand Identity',
-    text: 'Visual identity systems, logo thinking, typography, and consistent brand expression built to feel premium and memorable.',
-    price: 'From K150',
+    text: 'Visual identity systems, premium social graphics, and clear brand direction for businesses that want perceived value.',
+    price: 'From K250',
   },
   {
     title: 'Music & Promo Art',
-    text: 'Poster concepts, cover art, social visuals, and campaign creatives for musicians, creatives, and local businesses.',
-    price: 'From K150',
+    text: 'Poster concepts, event visuals, music covers, and audience-focused creative assets designed to stop the scroll.',
+    price: 'From K250',
   },
   {
     title: 'Tourism & Web Presence',
-    text: 'Landing pages, marketing visuals, and digital experiences that help tourism brands and founders attract attention online.',
+    text: 'Creative marketing systems, digital presentation assets, and visual direction for hospitality, tourism, and service brands.',
     price: 'Custom quote',
   },
 ];
 
-const work = [
+const portfolio = [
   {
     title: 'Tourism Campaign Kit',
-    tag: 'Branding + visual system',
-    text: 'A polished campaign package raising the perception of a destination or local experience through storytelling and modern design.',
+    tag: 'Branding + Visual Story',
+    text: 'An elevated destination campaign identity designed to make hospitality and travel offers feel premium and trust-worthy.',
   },
   {
     title: 'Music Promo Bundle',
-    tag: 'Poster + social media art',
-    text: 'A release-ready visual package built to support event announcements, content engagement, and artist positioning.',
+    tag: 'Poster + Social Content',
+    text: 'A release-ready visual system built to support announcements, streaming pushes, and audience activation.',
   },
   {
     title: 'Creative Portfolio Experience',
-    tag: 'Website + digital presence',
-    text: 'A consciously crafted online presence that communicates trust, taste, and clarity for the audience you want to attract.',
+    tag: 'Web Presence + Digital Brand',
+    text: 'A clever, concise, conversion-focused online presence built to communicate clarity, quality, and positioning.',
   },
 ];
 
 const process = [
-  'Discover the vision, audience, and the emotional hook you want your brand to carry.',
-  'Translate that vision into an intentional direction, palette, typography and layout system.',
-  'Design and refine final assets for launch, social use, digital platforms and business credibility.',
-  'Launch with confidence and iterate as your business grows.',
+  'Clarify the offer, audience, and creative objective in a short discovery conversation.',
+  'Build the design direction, tone, hierarchy, and visual assets around your message.',
+  'Refine the concept through a tight revision round and final delivery workflow.',
+  'Launch with confidence and keep iterating as your business grows.',
 ];
 
 const testimonials = [
   {
-    quote: 'The work felt premium from the first concept. It immediately elevated how our audience understood the brand.',
-    author: 'Client, Creative Brand Project',
+    quote: 'The visuals immediately made the brand feel more premium, clearer, and far more deliberate.',
+    author: 'Brand Client',
   },
   {
-    quote: 'Clean execution, strong creative thinking, and a clear understanding of how visuals must support business goals.',
-    author: 'Founder, Tourism+Culture Venture',
+    quote: 'Strong creative instinct, clean execution, and a real understanding of what audiences respond to.',
+    author: 'Tourism Founder',
   },
 ];
 
-const whatsappLink = `https://wa.me/${siteConfig.whatsappNumber}`;
-const emailLink = `mailto:${siteConfig.email}`;
+const defaultForm = {
+  name: '',
+  email: '',
+  project: 'Brand design',
+  budget: 'K500–K1,000',
+  note: '',
+};
 
 function App() {
+  const [form, setForm] = useState(defaultForm);
+
+  const whatsAppLink = useMemo(() => {
+    const message = [
+      'Hello O\'BUUMBA Creative,',
+      '',
+      `Name: ${form.name || 'Client'}`,
+      `Email: ${form.email || 'Not provided'}`,
+      `Project: ${form.project}`,
+      `Budget: ${form.budget}`,
+      `Brief: ${form.note || 'No additional details provided yet.'}`,
+    ].join('%0A');
+
+    return getWhatsAppLink('SERVICES', message);
+  }, [form]);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setForm((current) => ({ ...current, [name]: value }));
+  };
+
   return (
-    <div className="page-shell">
+    <div className="app-shell">
       <header className="topbar">
         <div className="brand-mark">OB</div>
         <nav className="nav" aria-label="Main navigation">
           <a href="#home">Home</a>
+          <a href="#ecosystem">Ecosystem</a>
           <a href="#services">Services</a>
-          <a href="#work">Work</a>
-          <a href="#process">Process</a>
+          <a href="#portfolio">Portfolio</a>
+          <a href="#pricing">Pricing</a>
           <a href="#contact">Contact</a>
         </nav>
-        <a className="button button-primary" href={whatsappLink} target="_blank" rel="noreferrer">
-          Book a call
+        <a className="button button-primary" href={getWhatsAppLink('SERVICES')} target="_blank" rel="noreferrer">
+          Book a project
         </a>
       </header>
 
@@ -81,48 +114,51 @@ function App() {
             <h1>{siteConfig.tagline}</h1>
             <p className="lead">{siteConfig.originLine}</p>
             <p className="description">
-              {siteConfig.brandName} is a creative studio rooted in Livingstone, Zambia and built for businesses,
-              creators, and cultural brands that want design that feels clear, elevated, and memorable.
+              {siteConfig.brandName} is a premium creative studio rooted in Livingstone, Zambia. We build visual systems,
+              design experiences, and digital assets that help founders, businesses, and creatives show up with clarity,
+              confidence and authority.
             </p>
 
             <div className="cta-row">
-              <a className="button button-primary" href={whatsappLink} target="_blank" rel="noreferrer">
-                Start a project
+              <a className="button button-primary" href={getWhatsAppLink('SERVICES')} target="_blank" rel="noreferrer">
+                Start your project
               </a>
-              <a className="button button-ghost" href="#services">
-                Explore services
+              <a className="button button-ghost" href="#ecosystem">
+                Explore ecosystem
               </a>
             </div>
 
-            <div className="metrics">
+            <div className="metric-grid">
               <div>
-                <strong>2–4 days</strong>
-                <span>Poster turnaround</span>
+                <strong>K250</strong>
+                <span>starter poster pricing</span>
               </div>
               <div>
-                <strong>1–4 weeks</strong>
-                <span>Branding projects</span>
+                <strong>48–72h</strong>
+                <span>fast poster turnaround</span>
               </div>
               <div>
                 <strong>Worldwide</strong>
-                <span>Remote delivery</span>
+                <span>remote service delivery</span>
               </div>
             </div>
           </div>
 
-          <div className="hero-card-wrap">
-            <div className="hero-card">
-              <div className="card-topline">
-                <span className="status">Creative Studio</span>
-                <span className="online-pill">Online</span>
+          <div className="hero-visual-card">
+            <div className="studio-panel">
+              <div className="panel-head">
+                <span className="status-pill">Creative Studio</span>
+                <span className="status-pill inverse">Live</span>
               </div>
+
               <div className="visual-grid" aria-hidden="true">
-                <div className="block one"></div>
-                <div className="block two"></div>
-                <div className="block three"></div>
-                <div className="block four"></div>
+                <div className="visual-box tall" />
+                <div className="visual-box" />
+                <div className="visual-box" />
+                <div className="visual-box" />
               </div>
-              <div className="card-bottom">
+
+              <div className="panel-meta">
                 <div>
                   <small>Founder</small>
                   <strong>{siteConfig.founderName}</strong>
@@ -136,10 +172,27 @@ function App() {
           </div>
         </section>
 
+        <section className="section" id="ecosystem">
+          <div className="section-heading">
+            <span className="eyebrow">Ecosystem</span>
+            <h2>AI builders, creative systems, and digital growth infrastructure.</h2>
+          </div>
+
+          <div className="ecosystem-grid">
+            {ecosystemNodes.map((node) => (
+              <article className="ecosystem-card" key={node.name}>
+                <span className="mini-badge">{node.label}</span>
+                <h3>{node.name}</h3>
+                <p>{node.description}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
         <section className="section" id="services">
-          <div className="section-title">
+          <div className="section-heading">
             <span className="eyebrow">Services</span>
-            <h2>Creative services for brands that want to be remembered.</h2>
+            <h2>Creative services built for brands that want to look premium and perform clearly.</h2>
           </div>
 
           <div className="service-grid">
@@ -153,16 +206,16 @@ function App() {
           </div>
         </section>
 
-        <section className="section" id="work">
-          <div className="section-title">
-            <span className="eyebrow">Selected work</span>
-            <h2>Designed to move attention into action.</h2>
+        <section className="section" id="portfolio">
+          <div className="section-heading">
+            <span className="eyebrow">Portfolio</span>
+            <h2>Selected concepts and commercially-minded creative direction.</h2>
           </div>
 
-          <div className="work-grid">
-            {work.map((item) => (
-              <article className="work-card" key={item.title}>
-                <div className="mini-visual" aria-hidden="true" />
+          <div className="portfolio-grid">
+            {portfolio.map((item) => (
+              <article className="portfolio-card" key={item.title}>
+                <div className="portfolio-visual" aria-hidden="true" />
                 <span className="tag">{item.tag}</span>
                 <h3>{item.title}</h3>
                 <p>{item.text}</p>
@@ -172,9 +225,9 @@ function App() {
         </section>
 
         <section className="section" id="process">
-          <div className="section-title">
+          <div className="section-heading">
             <span className="eyebrow">Process</span>
-            <h2>Simple process. Premium outcomes.</h2>
+            <h2>Simple and deliberate. Built for clarity and momentum.</h2>
           </div>
 
           <div className="process-grid">
@@ -188,9 +241,9 @@ function App() {
         </section>
 
         <section className="section" id="pricing">
-          <div className="section-title">
+          <div className="section-heading">
             <span className="eyebrow">Pricing</span>
-            <h2>Transparent starting points for creative work.</h2>
+            <h2>Transparent starting points for high-impact creative work.</h2>
           </div>
 
           <div className="pricing-grid">
@@ -203,7 +256,7 @@ function App() {
 
             <article className="price-card">
               <span className="chip">{pricingConfig.posterTrioPrice}</span>
-              <h3>Three-Design Bundle</h3>
+              <h3>Promo Pack</h3>
               <p>{pricingConfig.posterTrioNote}</p>
               <small>{pricingConfig.turnaroundPoster}</small>
             </article>
@@ -211,42 +264,101 @@ function App() {
             <article className="price-card">
               <span className="chip">{pricingConfig.customNote}</span>
               <h3>Branding Project</h3>
-              <p>Custom scope for identity and digital presence work.</p>
+              <p>Custom scope for identity, campaign, and digital presence work.</p>
               <small>{pricingConfig.turnaroundBranding}</small>
             </article>
           </div>
 
-          <p className="pricing-disclaimer">{pricingConfig.pricingDisclaimer}</p>
+          <p className="pricing-note">{pricingConfig.pricingDisclaimer}</p>
         </section>
 
         <section className="section testimonials">
-          <div className="section-title">
+          <div className="section-heading">
             <span className="eyebrow">Client perspective</span>
-            <h2>Creative work that feels clear and credible.</h2>
+            <h2>Designed to elevate perception before the first conversation even starts.</h2>
           </div>
 
           <div className="testimonial-grid">
-            {testimonials.map((quote) => (
-              <blockquote className="quote-card" key={quote.author}>
-                <p>“{quote.quote}”</p>
-                <footer>{quote.author}</footer>
+            {testimonials.map((item) => (
+              <blockquote className="quote-card" key={item.author}>
+                <p>“{item.quote}”</p>
+                <footer>{item.author}</footer>
               </blockquote>
             ))}
           </div>
         </section>
 
-        <section className="cta-panel" id="contact">
-          <div>
+        <section className="section" id="contact">
+          <div className="section-heading">
             <span className="eyebrow">Contact</span>
-            <h2>Need a visual identity or digital touchpoint that actually speaks to your audience?</h2>
+            <h2>Tell us what you want to build, launch or promote.</h2>
           </div>
-          <div className="cta-actions">
-            <a className="button button-primary" href={whatsappLink} target="_blank" rel="noreferrer">
-              WhatsApp {siteConfig.whatsappDisplay}
-            </a>
-            <a className="button button-ghost" href={emailLink}>
-              {siteConfig.email}
-            </a>
+
+          <div className="contact-grid">
+            <form className="inquiry-form" onSubmit={(event) => {
+              event.preventDefault();
+              window.open(whatsAppLink, '_blank', 'noopener,noreferrer');
+            }}>
+              <label>
+                Name
+                <input name="name" value={form.name} onChange={handleChange} placeholder="Your name" />
+              </label>
+
+              <label>
+                Email
+                <input name="email" type="email" value={form.email} onChange={handleChange} placeholder="you@example.com" />
+              </label>
+
+              <label>
+                Project type
+                <select name="project" value={form.project} onChange={handleChange}>
+                  <option value="Brand design">Brand design</option>
+                  <option value="Poster design">Poster design</option>
+                  <option value="Tourism promotion">Tourism promotion</option>
+                  <option value="Web presence">Web presence</option>
+                  <option value="Creative campaign">Creative campaign</option>
+                </select>
+              </label>
+
+              <label>
+                Budget range
+                <select name="budget" value={form.budget} onChange={handleChange}>
+                  <option value="K250–K500">K250–K500</option>
+                  <option value="K500–K1,000">K500–K1,000</option>
+                  <option value="K1,000–K2,500">K1,000–K2,500</option>
+                  <option value="Custom budget">Custom budget</option>
+                </select>
+              </label>
+
+              <label>
+                Project brief
+                <textarea name="note" value={form.note} onChange={handleChange} placeholder="Tell us more about your offer, event, audience, or goals." rows="5" />
+              </label>
+
+              <div className="form-actions">
+                <button type="submit" className="button button-primary">
+                  Send via WhatsApp
+                </button>
+                <a className="button button-ghost" href={siteConfig.social.email}>
+                  Email us
+                </a>
+              </div>
+            </form>
+
+            <aside className="contact-panel">
+              <div className="contact-card">
+                <p className="eyebrow">Reach out</p>
+                <h3>{siteConfig.brandName}</h3>
+                <ul>
+                  <li>{siteConfig.whatsappDisplay}</li>
+                  <li>{siteConfig.email}</li>
+                  <li>{siteConfig.locationLabel}</li>
+                </ul>
+                <a className="button button-primary" href={siteConfig.social.whatsapp} target="_blank" rel="noreferrer">
+                  WhatsApp us now
+                </a>
+              </div>
+            </aside>
           </div>
         </section>
       </main>
